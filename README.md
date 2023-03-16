@@ -42,6 +42,16 @@ There are two major parts to this project: For each data integration problem, i.
  1. Develop a dense embedding matrix (X.text) from raw data (using SBERT, FastText, TabTransformer, and Tabnet to embed Tables for schema inference, EmbDi to embed rows for entity resolution, and EmbDi to embed columns for domain discovery).
  2. A dense embedding matrix (X.text) will then be used in deep clustering algorithms (SDCN and EDESC) as input to perform clustering.
 
+## Steps
+
+Here we show demo steps to re-produce results for schema inference using schema-level data.
+
+````
+1. Compile schema inference/schema + instances/Preprocessing.ipynb to get schema level information from tables.
+2. The generated TextPre1.csv can then be used to produce a dense embedding matrix (X.text) using SBERT by compiling schema inference/schema only/SBERT+FastText.py
+3. We have X.text feature vector that will be used to get clustering results in SDCN by compiling DC/SDCN/data/pretrain.py for pretraining or DNN version and DC/SDCN/sdcn.py
+
+````
 
 
 
