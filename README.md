@@ -27,6 +27,11 @@ This repo provides the following:
 **Special thanks** to the authors (of all deep clustering and embedding approaches mentioned above) for providing their implementations publically.
 
 
+## Requirements
+* Python 3.7 
+* pytorch-cuda=11.7 or above
+* To reproduce results efficiently you will need GPU a100 or v100.
+
 
 **Note:** Due to storage limitations, please unzip (Tables.zip) before compiling schema inference code.
 
