@@ -33,6 +33,37 @@ This repo provides the following:
 * To reproduce results efficiently you will need GPU a100 or v100.
 
 
+
+## Hyperparameters
+In order to reproduce results in the paper, following parameters can be adopted:
+
+| DC Method | Task | Embedding | P-train epochs | Training Epochs | Z	Layer Size | P-train algo | train algo | 
+| ---|--- |--- |--- |--- |--- |--- |---|              
+|SDCN	|SI	|SBERT|	**0|	35|	100	|1000|	-|	Kmean|
+|SDCN	|SI	|FastText|	28|	2|	100|	1000|	Birch|	Kmean|
+|SDCN	|SI	|TabNet	|50|	1|	100|	5000|	Kmean	|Kmean|
+|SDCN	|SI	|TabTransformer|	50|	7|	100|	5000|	Kmean|	Kmean|
+|EDESC|	SI|	SBERT|	49|	2|	104|	500|	Birch|	Birch|
+|EDESC|	SI|	FastText|	32|	2	|156|	1000|	Kmean|	kmean|
+|EDESC|	SI|	TabNet|	50|	106	|130	|1000|	Birch|	Birch|
+|EDESC|	SI|	TabTransformer|	50|	108	|130|	5000|	Birch|	Birch|
+|SDCN	|ER	|EmbDi	**0|	34|	250|	5000	|-|	Birch|
+|EDESC|	ER	|EmbDi|	50	|3	|684|	6000	|Birch|	Birch|
+|SDCN	|DD	|SBERT|	**0|	8|	100	|1000	|-|	Birch|
+|SDCN	|DD	|FastText|	5|	16|	100|	500|	Kmean	|Birch|
+|SDCN	|DD	|EmbDi	|50	|1	|56	|2000*	|Birch	|Kmean|
+|EDESC|	DD|	SBERT|	4|	5|	112	|1000|	Birch	|Birch|
+|EDESC|	DD|	FastText|	49|	2|	56	|1000	|Birch|	Birch|
+|EDESC|	DD|	EmbDi|	3|	7|	280	|256	|Kmean|	kmean|
+
+*SDCN used total 6 layers with layers size of 256 and 2000.
+
+** Specific DNN experiment with AE + (Birch or Kmean)
+
+
+
+
+
 **Note:** Due to storage limitations, please unzip (Tables.zip) before compiling schema inference code.
 
 
