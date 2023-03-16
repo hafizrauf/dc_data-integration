@@ -44,7 +44,7 @@ There are two major parts to this project: For each data integration problem, i.
 
 ## Steps
 
-Here we show demo steps to re-produce results for schema inference using schema-level data.
+Here we show demo steps to re-produce results for schema inference using schema-level data and for entity resolution for schema+instance level data.
 
 
 1. Compile schema inference/schema + instances/Preprocessing.ipynb to get schema level information from tables.
@@ -56,8 +56,8 @@ Here we show demo steps to re-produce results for schema inference using schema-
    3.2. DC/SDCN/data/pretrain.py for pretraining or DNN version 
   
    3.3. DC/SDCN/sdcn.py for clustering results
-
-
+4. Compile entity resolution/ER.py to get row embedding matrix (X.text) using EmbDi.
+5. Repeat step (3) with input as row embedding matrix (X.text) to get clustering results.
 
 
 
