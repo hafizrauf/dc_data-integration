@@ -49,10 +49,13 @@ Here we show demo steps to re-produce results for schema inference using schema-
 
 1. Compile schema inference/schema + instances/Preprocessing.ipynb to get schema level information from tables.
 2. The generated TextPre1.csv can then be used to produce a dense embedding matrix (X.text) using SBERT by compiling schema inference/schema only/SBERT+FastText.py
-3. We have X.text feature vector that will be used to get clustering results in SDCN by compiling
-   3.1  DC/SDCNcalcu_graph.py to generate KNN graph
-   3.2  DC/SDCN/data/pretrain.py for pretraining or DNN version 
-   3.3  DC/SDCN/sdcn.py for clustering results
+3. We have X.text feature vector that will be used to get clustering results in SDCN by compiling.
+
+   3.1. DC/SDCNcalcu_graph.py to generate KNN graph
+  
+   3.2. DC/SDCN/data/pretrain.py for pretraining or DNN version 
+  
+   3.3. DC/SDCN/sdcn.py for clustering results
 
 
 
