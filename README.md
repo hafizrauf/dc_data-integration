@@ -39,8 +39,8 @@ This repo provides the following:
 There are two major parts to this project: For each data integration problem, i.e., schema inference, entity resolution, and domain discovery:
 
 
-Markup : 1. Develop a dense embedding matrix (X.text) from raw data (using SBERT, FastText, TabTransformer, and Tabnet to embed Tables for schema inference, EmbDi to embed rows for entity resolution, and EmbDi to embed columns for domain discovery).
-         2. A dense embedding matrix (X.text) will then be used in deep clustering algorithms (SDCN and EDESC) as input to perform clustering.
+ 1. Develop a dense embedding matrix (X.text) from raw data (using SBERT, FastText, TabTransformer, and Tabnet to embed Tables for schema inference, EmbDi to embed rows for entity resolution, and EmbDi to embed columns for domain discovery).
+ 2. A dense embedding matrix (X.text) will then be used in deep clustering algorithms (SDCN and EDESC) as input to perform clustering.
 
 
 
