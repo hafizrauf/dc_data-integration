@@ -64,8 +64,8 @@ Here we show demo steps to re-produce results for schema inference using schema-
 ## Hyperparameters
 In order to reproduce results in the paper, following parameters can be adopted:
 
-| DC Method | Task | Embedding | P-train epochs | Training Epochs | Z	Layer Size | P-train algo | train algo | 
-| ---|--- |--- |--- |--- |--- |--- |---|              
+| DC Method | Task | Embedding | P-train epochs | Training Epochs | Z	|Layer Size | P-train algo | train algo | 
+| ---|--- |--- |--- |--- |--- |--- |---|---|              
 |SDCN	|SI	|SBERT|	**0|	35|	100	|1000|	-|	Kmean|
 |SDCN	|SI	|FastText|	28|	2|	100|	1000|	Birch|	Kmean|
 |SDCN	|SI	|TabNet	|50|	1|	100|	5000|	Kmean	|Kmean|
@@ -74,7 +74,7 @@ In order to reproduce results in the paper, following parameters can be adopted:
 |EDESC|	SI|	FastText|	32|	2	|156|	1000|	Kmean|	kmean|
 |EDESC|	SI|	TabNet|	50|	106	|130	|1000|	Birch|	Birch|
 |EDESC|	SI|	TabTransformer|	50|	108	|130|	5000|	Birch|	Birch|
-|SDCN	|ER	|EmbDi	**0|	34|	250|	5000	|-|	Birch|
+|SDCN	|ER	|EmbDi	|**0|	34|	250|	5000	|-|	Birch|
 |EDESC|	ER	|EmbDi|	50	|3	|684|	6000	|Birch|	Birch|
 |SDCN	|DD	|SBERT|	**0|	8|	100	|1000	|-|	Birch|
 |SDCN	|DD	|FastText|	5|	16|	100|	500|	Kmean	|Birch|
