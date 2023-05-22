@@ -189,18 +189,24 @@ def cluster_acc2(y_true, y_pred):
     return acc, f1_macro
 
 
-
-def eva(y_true, y_pred, epoch=0):
+bestari = 0
+bestsil = 0
+def eva(y_true, y_pred,sil, epoch=0):
+    global bestari
+    global bestsil
     acc, f1 = cluster_acc2(y_true, y_pred)
     nmi = nmi_score(y_true, y_pred, average_method='arithmetic')
     ari = ari_score(y_true, y_pred)
+    if ari > bestari:
+            bestari = ari   
+    if sil > bestsil:
+            bestsil = sil   
     n_clus = len(np.unique(y_pred))
     print(epoch, ':acc {:.4f}'.format(acc), ', nmi {:.4f}'.format(nmi), ', ari {:.4f}'.format(ari),
-            ', f1 {:.4f}'.format(f1), ', Number of Clusters {:.4f}'.format(n_clus))
+            ', f1 {:.4f}'.format(f1), ', Number of Clusters {:.4f}'.format(n_clus),',Best ari {:.4f}'.format(bestari),',Best sil_score {:.4f}'.format(bestsil))
     revised_rand_index(y_true, y_pred, epoch)
     df = pd.DataFrame(y_pred) 
     count=df.value_counts().tolist()
     print('epoch = '+ str(epoch)+' Median cluster count = '+str(statistics.median(count)))
     print('epoch = '+ str(epoch)+' Mean cluster count = '+str(statistics.mean(count)))
-    return ari    
-
+    return ari, acc 
