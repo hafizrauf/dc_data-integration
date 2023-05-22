@@ -128,8 +128,8 @@ def pretrain_ae(model):
 def train_EDESC():
 
     model = EDESC(
-        n_enc_1=256,
-        n_dec_1=256,
+        n_enc_1=1000,
+        n_dec_1=1000,
         n_input=args.n_input,
         n_z=args.n_z,
         n_clusters=args.n_clusters,
