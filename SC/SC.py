@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
 
 
 from sklearn.cluster import DBSCAN
@@ -22,8 +21,6 @@ from scipy.optimize import linear_sum_assignment as linear
 from sklearn import metrics
 from scipy.special import comb
 
-
-# In[2]:
 
 
 def cluster_acc2(y_true, y_pred):
@@ -107,8 +104,6 @@ def cluster_acc2(y_true, y_pred):
     return acc, f1_macro
 
 
-# In[3]:
-
 
 def acc(y_true, y_pred):
         y_true = y_true.astype(np.int64)
@@ -123,7 +118,6 @@ def acc(y_true, y_pred):
     
 
 
-# In[4]:
 
 
 #define Rand index function
@@ -154,13 +148,22 @@ def revised_rand_index(actual, pred):
 
 
 X=pd.read_csv('X.txt', header =None, sep = ' ')
+
+
 Y=pd.read_csv('labels.txt', sep=' ', header = None)
 Y= pd.DataFrame(Y)
+#Y = Y.iloc[1: , :]
+#Y1 = Y[0]
+#Y = Y[1]
+
 Y = Y.to_numpy()
 Y=Y.flatten()
+Y
+
+print("-----------------------------------Birch----------------------------------------")
 start = time()
 from sklearn.cluster import Birch
-brc = Birch(n_clusters = 26, branching_factor = 20) #
+brc = Birch(n_clusters = 26) #
 brc.fit(X)
 brc.predict(X)
 acc, f1 = cluster_acc2(Y, brc.predict(X))
@@ -180,7 +183,8 @@ end = time()
 print("Birch took ",{end-start}," sec to run.")
 
 
-#------------------
+print("-----------------------------------Kmean----------------------------------------")
+#------
 from sklearn.cluster import KMeans
 start = time()
 kmeans = KMeans(n_clusters=26, n_init=2, random_state= 2).fit(X)
@@ -199,32 +203,6 @@ print('Median cluster count = '+str(statistics.median(count)))
 print('Mean cluster count = '+str(statistics.mean(count)))
 end = time()
 print("Kmeans took ",{end-start}," sec to run.")
-
-
-
-
-
-#------------------
-from sklearn.cluster import AffinityPropagation
-start = time()
-clustering = AffinityPropagation(damping = 0.7).fit(X)
-
-acc, f1 = cluster_acc2(Y, clustering.labels_)
-clustering.labels_
-print('Number of clusters '+str(len(np.unique(clustering.labels_))))
-print('Rand Score '+str(rand_score(Y, clustering.labels_)))
-print('Rand Score '+str(revised_rand_index(Y, clustering.labels_)))
-print('Adjusted Rand Score '+str(adjusted_rand_score(Y, clustering.labels_)))
-print('Normalized mutual info scor '+str(normalized_mutual_info_score(Y, clustering.labels_)))
-print('Accuracy '+str(acc))
-print('F1 '+str(f1))
-df = pd.DataFrame(clustering.labels_) 
-df.to_csv('AP_pred.csv',sep=',', header = None)  
-count=df.value_counts().tolist()
-print('Median cluster count = '+str(statistics.median(count)))
-print('Mean cluster count = '+str(statistics.mean(count)))
-end = time()
-print("Affinity Propagation took ",{end-start}," sec to run.")
 
 
 
