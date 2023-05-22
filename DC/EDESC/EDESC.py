@@ -179,7 +179,6 @@ def train_EDESC():
 
         # Evaluate clustering performance
         y_pred = tmp_s.cpu().detach().numpy().argmax(1)
-        np.savetxt('ER_SBERT_EDESC_rep.txt',tmp_s.cpu().detach().numpy(),  fmt= '%.4e')
         sil = silhouette_score(tmp_s.cpu().detach().numpy(), y_pred)                
         delta_label = np.sum(y_pred != y_pred_last).astype(
             np.float32) / y_pred.shape[0]
