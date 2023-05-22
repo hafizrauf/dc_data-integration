@@ -179,7 +179,8 @@ def train_EDESC():
 
         # Evaluate clustering performance
         y_pred = tmp_s.cpu().detach().numpy().argmax(1)
-	sil = silhouette_score(tmp_s.cpu().detach().numpy(), y_pred)      
+        np.savetxt('ER_SBERT_EDESC_rep.txt',tmp_s.cpu().detach().numpy(),  fmt= '%.4e')
+        sil = silhouette_score(tmp_s.cpu().detach().numpy(), y_pred)                
         delta_label = np.sum(y_pred != y_pred_last).astype(
             np.float32) / y_pred.shape[0]
         y_pred_last = y_pred
@@ -192,10 +193,12 @@ def train_EDESC():
         if ari > arimax:
             arimax = ari    
         if nmi > nmimax:
-            nmimax = nmi            
+            nmimax = nmi
+        if sil > bestsil:
+            bestsil = sil               
         print('Iter {}'.format(epoch), ':Current Acc {:.4f}'.format(acc),
                   ':Max Acc {:.4f}'.format(accmax),':Current Ari {:.4f}'.format(ari),
-                            ':Max Ari {:.4f}'.format(arimax),', Current nmi {:.4f}'.format(nmi), ':Max nmi {:.4f}'.format(nmimax), ', Number of Clusters {:.4f}'.format(n_clus))
+                            ':Max Ari {:.4f}'.format(arimax),', Current nmi {:.4f}'.format(nmi), ':Max nmi {:.4f}'.format(nmimax), ', Number of Clusters {:.4f}'.format(n_clus),' Maxsil {:.4f}'.format(bestsil))
         revised_rand_index(y, y_pred, epoch)
         df = pd.DataFrame(y_pred) 
         count=df.value_counts().tolist()
@@ -203,7 +206,7 @@ def train_EDESC():
         print('epoch = '+ str(epoch)+' Mean cluster count = '+str(statistics.mean(count)))
         e_end = time.time() 
         print("Epoch",{epoch},"took",{e_end-e_start}," sec to run.")
-        np.savetxt('DD_EmbDi_EDESC_pred.txt',y_pred,  fmt= '%.4e')
+        
         ############## Total loss function ######################
         loss = model.total_loss(data, x_bar, z, pred=s, target=s_tilde, dim=args.d, n_clusters = args.n_clusters, beta = args.beta)
 
@@ -212,7 +215,7 @@ def train_EDESC():
         optimizer.step()
     end = time.time()
     print('Running time: ', end-start)
-    return accmax, nmimax, arimax
+    return accmax, nmimax, arimax, bestsil
  
 
 if __name__ == "__main__":
@@ -245,12 +248,15 @@ if __name__ == "__main__":
     bestacc = 0 
     bestnmi = 0
     bestari=0
+    bestsil = 0
     for i in range(1):
-        acc, nmi, ari = train_EDESC()
+        acc, nmi, ari, sil = train_EDESC()
         if acc > bestacc:
             bestacc = acc
         if nmi > bestnmi:
             bestnmi = nmi
         if ari > bestari:
-            bestari = ari    
-    print('Best ACC {:.4f}'.format(bestacc), ' Best NMI {:4f}'.format(bestnmi),'Best ARI {:.4f}'.format(bestari))
+            bestari = ari
+        if sil > bestsil:
+            bestsil = sil        
+    print('Best ACC {:.4f}'.format(bestacc), ' Best NMI {:4f}'.format(bestnmi),'Best ARI {:.4f}'.format(bestari),'Best Sil {:.4f}'.format(bestsil))
