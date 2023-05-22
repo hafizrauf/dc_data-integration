@@ -65,27 +65,27 @@ Here we show demo steps to re-produce results for schema inference using schema-
 In order to reproduce results in the paper, following parameters can be adopted:
 
 | DC Method | Task | Embedding | P-train epochs | Training Epochs | Z	|Layer Size | P-train algo | train algo initialization| 
-| ---|--- |--- |--- |--- |--- |--- |---|---|              
-|SDCN|	SI|	SBERT|	30|	95|	100	|1000|	2|	Birch	|Birc|h
-|SDCN	|SI|	FastText|	30	|100|	100	|1000	|2|	kmeans|	kmeans|
-|SDCN	|SI|	TabNet|	30|	100|	100	|1000	|2|	kmeans|	kmeans|
-|SDCN	|SI|	TabTransformer|	30|	100|	100|	1000|	2|	kmeans|	kmeans|
-|EDESC	|SI|	SBERT|	30|	65|	104	|1000|	2|	Birch|	Birch|
-|EDESC	|SI|	FastText|	30|	43	|104	|1000	|2|	kmeans	|kmeans|
-|EDESC	|SI|	TabNet|	30	|96	|104|	1000	|2	|kmeans	|kmeans|
-|EDESC	|SI|	TabTransformer|	30	|73|	104|	1000	|2|	kmeans	|kmeans|
-|SDCN	|ER|	EmbDi|	100	|-|	100|	1000|	2	|Birch|	-|
-|EDESC|	ER|	EmbDi|	100|	4	|684|	1000|	2|	Birch|	Birch|
-|SDCN	|ER|	SBERT|	100|	-|	100|	1000|	2|	Birch|	-|
-|EDESC	|ER|	SBERT|	100|	76|	684	|1000	|2|	Birch|	Birch|
-|SDCN	|DD|	SBERT|	30	|88|	100|	1000	|2|	Birch|	Birch|
-|SDCN	|DD|	FastText|	30	|2|	100|	1000|	2|	Birch|	Birch|
-|SDCN	|DD|	EmbDi|	30|	1|	100|	1000	|2|	kmeans|	kmeans|
-|SDCN	|DD|	SBERT (H+B) |	30|	98|	100|	1000	|2|	Birch	|Birch|
-|EDESC|	DD|	SBERT|	30|	74|	112|	1000	|2|	Birch|	Birch|
-|EDESC|	DD|	FastText|	30|	100|	112	|1000	|2|	kmeans|	kmeans|
-|EDESC|	DD	|EmbDi|	30|	1	|112	|1000	|2|	kmean	|kmeans|
-|EDESC|	DD	|SBERT (H+B)|	30|	61|	100	|1000	|2|	Birch	|Birch|
+|---|---|---|---|---|---|---|---|---|              
+|SDCN|SI|SBERT|30|95|100	|1000|2|	Birch	|Birch|
+|SDCN|SI|FastText|30|100|100	|1000|2|kmeans|	kmeans|
+|SDCN|SI|TabNet|30|100|100|1000|2|kmeans|kmeans|
+|SDCN|SI|TabTransformer|	30|	100|	100|	1000|	2|	kmeans|	kmeans|
+|EDESC|SI|SBERT|	30|	65|	104	|1000|	2|	Birch|	Birch|
+|EDESC|SI|FastText|	30|	43	|104	|1000	|2|	kmeans	|kmeans|
+|EDESC|SI|TabNet|	30	|96	|104|	1000	|2	|kmeans	|kmeans|
+|EDESC|SI|TabTransformer|	30	|73|	104|	1000	|2|	kmeans	|kmeans|
+|SDCN	|ER|EmbDi|	100	|-|	100|	1000|	2	|Birch|	-|
+|EDESC|ER|EmbDi|	100|	4	|684|	1000|	2|	Birch|	Birch|
+|SDCN	|ER|SBERT|	100|	-|	100|	1000|	2|	Birch|	-|
+|EDESC|ER|SBERT|	100|	76|	684	|1000	|2|	Birch|	Birch|
+|SDCN	|DD|SBERT|	30	|88|	100|	1000	|2|	Birch|	Birch|
+|SDCN	|DD|FastText|	30	|2|	100|	1000|	2|	Birch|	Birch|
+|SDCN	|DD|EmbDi|	30|	1|	100|	1000	|2|	kmeans|	kmeans|
+|SDCN	|DD|SBERT (H+B) |	30|	98|	100|	1000	|2|	Birch	|Birch|
+|EDESC|DD|SBERT|	30|	74|	112|	1000	|2|	Birch|	Birch|
+|EDESC|DD|FastText|	30|	100|	112	|1000	|2|	kmeans|	kmeans|
+|EDESC|DD|EmbDi|	30|	1	|112	|1000	|2|	kmean	|kmeans|
+|EDESC|DD|SBERT (H+B)|	30|	61|	100	|1000	|2|	Birch	|Birch|
 
 
 *SDCN used total 6 layers with layers size of 256 and 2000.
