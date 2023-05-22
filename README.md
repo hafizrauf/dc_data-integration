@@ -39,8 +39,8 @@ This repo provides the following:
 There are two major parts to this project: For each data integration problem, i.e., schema inference, entity resolution, and domain discovery:
 
 
- 1. Develop a dense embedding matrix (X.text) from raw data (using SBERT, FastText, TabTransformer, and Tabnet to embed Tables for schema inference, EmbDi and SBERT to embed rows for entity resolution, and EmbDi and SBERT to embed columns for domain discovery).
- 2. A dense embedding matrix (X.text) will then be used in deep clustering algorithms (SDCN and EDESC) as input to perform clustering.
+ 1. Develop a dense embedding matrix (X.txt) from raw data (using SBERT, FastText, TabTransformer, and Tabnet to embed Tables for schema inference, EmbDi and SBERT to embed rows for entity resolution, and EmbDi and SBERT to embed columns for domain discovery).
+ 2. A dense embedding matrix (X.txt) will then be used in deep clustering algorithms (SDCN and EDESC) as input to perform clustering.
 
 ## Steps
 
@@ -48,8 +48,8 @@ Here we show demo steps to re-produce results for schema inference using schema-
 
 
 1. Compile schema inference/schema + instances/Preprocessing.ipynb to get schema level information from tables.
-2. The generated TextPre1.csv can be used to produce a dense embedding matrix (X.text) using SBERT by compiling schema inference/schema only/SBERT+FastText.py
-3. We have X.text feature vector which will be used to get clustering results in SDCN by compiling.
+2. The generated TextPre1.csv can be used to produce a dense embedding matrix (X.txt) using SBERT by compiling schema inference/schema only/SBERT+FastText.py
+3. We have X.txt feature vector which will be used to get clustering results in SDCN by compiling.
 
    3.1. DC/SDCNcalcu_graph.py to generate KNN graph
   
@@ -58,8 +58,8 @@ Here we show demo steps to re-produce results for schema inference using schema-
    3.3. DC/SDCN/sdcn.py for clustering results (we considered Q distribution as our final results)
   
    3.4. Please updated nb_dimension = 768  accordingly # for SBERT 786  
-4. Compile entity resolution/ER.py to get row embedding matrix (X.text) using EmbDi.
-5. Repeat step (3) with input as row embedding matrix (X.text) to get clustering results.
+4. Compile entity resolution/ER.py to get row embedding matrix (X.txt) using EmbDi and compile entity resolution/ER_SBERT/ER_SBERT.py to get row embeddings using SBERT.
+5. Repeat step (3) with input as row embedding matrix (X.txt) to get clustering results.
 6. Please repeat (3) for each embedding obtained (see folders --> schema inference/, entity resolution/ and domain discovery/) or see full_data/ to get the combination of all embeddings for all problems except DD due to the size limit. We are only able to provide ready-to-use embeddings for FasTtext.
 
 
