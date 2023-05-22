@@ -14,12 +14,12 @@ This repo provides the following:
 * [SDCN](https://github.com/bdy9527/SDCN)
 * [EDESC](https://github.com/JinyuCai95/EDESC-pytorch)
 
-#### Furthermore, following embedding techniques:
+#### And, the following embedding techniques:
 
 * [EmbDi](https://gitlab.eurecom.fr/cappuzzo/embdi)
 * [TabTransformer](https://github.com/jrzaurin/pytorch-widedeep)
 * [Tabnet](https://github.com/jrzaurin/pytorch-widedeep)
-* [SBER](https://www.sbert.net/docs/hugging_face.html)
+* [SBERT](https://www.sbert.net/docs/hugging_face.html)
 * [FastText](https://fasttext.cc/docs/en/crawl-vectors.html)
 
 #### For original implementations please see the links given above.
@@ -39,7 +39,7 @@ This repo provides the following:
 There are two major parts to this project: For each data integration problem, i.e., schema inference, entity resolution, and domain discovery:
 
 
- 1. Develop a dense embedding matrix (X.text) from raw data (using SBERT, FastText, TabTransformer, and Tabnet to embed Tables for schema inference, EmbDi to embed rows for entity resolution, and EmbDi to embed columns for domain discovery).
+ 1. Develop a dense embedding matrix (X.text) from raw data (using SBERT, FastText, TabTransformer, and Tabnet to embed Tables for schema inference, EmbDi and SBERT to embed rows for entity resolution, and EmbDi and SBERT to embed columns for domain discovery).
  2. A dense embedding matrix (X.text) will then be used in deep clustering algorithms (SDCN and EDESC) as input to perform clustering.
 
 ## Steps
@@ -53,9 +53,9 @@ Here we show demo steps to re-produce results for schema inference using schema-
 
    3.1. DC/SDCNcalcu_graph.py to generate KNN graph
   
-   3.2. DC/SDCN/data/pretrain.py for pretraining or DNN version 
+   3.2. DC/SDCN/data/pretrain.py for pretraining or DNN version (please see hyperparameter table below) 
   
-   3.3. DC/SDCN/sdcn.py for clustering results
+   3.3. DC/SDCN/sdcn.py for clustering results (we considered Q distribution as our final results)
 4. Compile entity resolution/ER.py to get row embedding matrix (X.text) using EmbDi.
 5. Repeat step (3) with input as row embedding matrix (X.text) to get clustering results.
 
