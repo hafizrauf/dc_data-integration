@@ -6,6 +6,7 @@ from sklearn.cluster import KMeans
 from sklearn.metrics.cluster import normalized_mutual_info_score as nmi_score
 import torch
 import torch.nn as nn
+from sklearn.metrics import  silhouette_score
 import torch.nn.functional as F
 from torch.nn.parameter import Parameter
 from torch.optim import Adam
