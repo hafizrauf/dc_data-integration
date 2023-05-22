@@ -146,17 +146,17 @@ def train_EDESC():
     y = dataset.y
     data = torch.Tensor(data).to(device)
     x_bar, hidden = model.ae(data)
-    brc = Birch(n_clusters = args.n_clusters, branching_factor = 20)
-  #  kmeans = KMeans(n_clusters=args.n_clusters, n_init=10)
-    # Get clusters from Consine K-means 
-   # X = hidden.data.cpu().numpy()
-   # length = np.sqrt((X**2).sum(axis=1))[:,None]
-   # X = X / length
-   # y_pred = kmeans.fit_predict(X)
+    #    kmeans = KMeans(n_clusters=args.n_clusters, n_init=2, random_state= 2)
+    brc = Birch(n_clusters=args.n_clusters)
+     #Get clusters from Consine K-means 
+#    X = hidden.data.cpu().numpy()
+#    length = np.sqrt((X**2).sum(axis=1))[:,None]
+#    X = X / length
+#    y_pred = kmeans.fit_predict(X)
  
     # Get clusters from K-means
     y_pred = brc.fit_predict(hidden.data.cpu().numpy())
-    np.savetxt('DD_EmbDi_EDESC_rep.txt',hidden.data.cpu().numpy(),  fmt= '%.4e')
+  
     print("Initial Cluster Centers: ", y_pred)
     
     # Initialize D
@@ -179,6 +179,7 @@ def train_EDESC():
 
         # Evaluate clustering performance
         y_pred = tmp_s.cpu().detach().numpy().argmax(1)
+	sil = silhouette_score(tmp_s.cpu().detach().numpy(), y_pred)      
         delta_label = np.sum(y_pred != y_pred_last).astype(
             np.float32) / y_pred.shape[0]
         y_pred_last = y_pred
