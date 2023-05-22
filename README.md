@@ -90,6 +90,8 @@ In order to reproduce results in the paper, following parameters can be adopted:
 
 **-** SDCN or EDESC did not manage to improve the representation, and we retained the AE training with Birch or Kmeans clustering
 
-**Note:** Due to storage limitations, please unzip (Tables.zip) before compiling schema inference code.
+**Note:** 
+**1.** Due to storage limitations, please unzip (Tables.zip) before compiling schema inference code.
+**2.** Due to different levels of precision for floating-point arithmetic and the architectural aspect of different GPUs and CPUs, the resulting values can be slightly different. However, the overall results will be the same.
 
 
