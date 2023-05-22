@@ -44,20 +44,23 @@ There are two major parts to this project: For each data integration problem, i.
 
 ## Steps
 
-Here we show demo steps to re-produce results for schema inference using schema-level data and for entity resolution for schema+instance level data.
+Here we show demo steps to re-produce results for schema inference using schema-level data (SBERT + SDCN) and for entity resolution for schema+instance level data (EmbDi + SDCN). 
 
 
 1. Compile schema inference/schema + instances/Preprocessing.ipynb to get schema level information from tables.
-2. The generated TextPre1.csv can then be used to produce a dense embedding matrix (X.text) using SBERT by compiling schema inference/schema only/SBERT+FastText.py
-3. We have X.text feature vector that will be used to get clustering results in SDCN by compiling.
+2. The generated TextPre1.csv can be used to produce a dense embedding matrix (X.text) using SBERT by compiling schema inference/schema only/SBERT+FastText.py
+3. We have X.text feature vector which will be used to get clustering results in SDCN by compiling.
 
    3.1. DC/SDCNcalcu_graph.py to generate KNN graph
   
-   3.2. DC/SDCN/data/pretrain.py for pretraining or DNN version (please see hyperparameter table below) 
+   3.2. DC/SDCN/data/pretrain.py for pretraining or AE version (please see hyperparameter table below) 
   
    3.3. DC/SDCN/sdcn.py for clustering results (we considered Q distribution as our final results)
+  
+   3.4. Please updated nb_dimension = 768  accordingly # for SBERT 786  
 4. Compile entity resolution/ER.py to get row embedding matrix (X.text) using EmbDi.
 5. Repeat step (3) with input as row embedding matrix (X.text) to get clustering results.
+6. Please repeat (3) for each embeddings obtained (see folders --> ischema inference/, entity resolution/ and domain discovery/) or see full_data/ to get the   combination of all embeddings for all problems.
 
 
 
@@ -94,6 +97,6 @@ In order to reproduce results in the paper, following parameters can be adopted:
 
 **1.** Due to storage limitations, please unzip (Tables.zip) before compiling schema inference code.
 
-**2.** Due to different levels of precision for floating-point arithmetic and the architectural aspect of different GPUs and CPUs, the resulting values can be slightly different. However, the overall results will be the same.
+**2.** Due to different levels of precision for floating-point arithmetic and the architectural aspect of different GPUs and CPUs, the resulting values can be slightly different. However, the overall results will be the same. We used **Nvidia A100 GPU with 80GB GPU RAM **.
 
 
