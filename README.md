@@ -60,7 +60,7 @@ Here we show demo steps to re-produce results for schema inference using schema-
    3.4. Please updated nb_dimension = 768  accordingly # for SBERT 786  
 4. Compile entity resolution/ER.py to get row embedding matrix (X.text) using EmbDi.
 5. Repeat step (3) with input as row embedding matrix (X.text) to get clustering results.
-6. Please repeat (3) for each embeddings obtained (see folders --> ischema inference/, entity resolution/ and domain discovery/) or see full_data/ to get the   combination of all embeddings for all problems.
+6. Please repeat (3) for each embedding obtained (see folders --> schema inference/, entity resolution/ and domain discovery/) or see full_data/ to get the combination of all embeddings for all problems except DD due to the size limit. We are only able to provide ready-to-use embeddings for FasTtext.
 
 
 
