@@ -88,13 +88,7 @@ In order to reproduce results in the paper, following parameters can be adopted:
 |EDESC|DD|SBERT (H+B)|	30|	61|	100	|1000	|2|	Birch	|Birch|
 
 
-*SDCN used total 6 layers with layers size of 256 and 2000.
-
-** Specific DNN experiment with AE + (Birch or kmeans)
-
-
-
-
+**-** SDCN or EDESC did not manage to improve the representation, and we retained the AE training with Birch or Kmeans clustering
 
 **Note:** Due to storage limitations, please unzip (Tables.zip) before compiling schema inference code.
 
