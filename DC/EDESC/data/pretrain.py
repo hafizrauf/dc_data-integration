@@ -21,8 +21,8 @@ random.seed(555)
 np.random.seed(555)
 torch.manual_seed(555)
 
-corpora_name ='X' # id of data set
-labels ='labels' # labels of dataset
+corpora_name ='dataset1/X' # id of data set
+labels ='dataset1/labels' # labels of dataset
 nb_dimension = 768 # embeddings dim
 
 
@@ -105,7 +105,7 @@ def pretrain_ae(model, dataset, y):
             e_end = time()
             print("Epoch",{epoch},"took",{e_end-e_start}," sec to run.")
             #eva(y, kmeans.labels_, epoch)
-        torch.save(model.state_dict(), corpora_name+'.pkl')
+        torch.save(model.state_dict(), 'X.pkl')
    
 
 
