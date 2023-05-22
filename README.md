@@ -62,6 +62,8 @@ Here we show demo steps to re-produce results for schema inference using schema-
 5. Repeat step (3) with input as row embedding matrix (X.txt) to get clustering results.
 6. Please repeat (3) for each embedding obtained (see folders --> schema inference/, entity resolution/ and domain discovery/) or see full_data/ to get the combination of all embeddings for all problems except DD due to the size limit. We are only able to provide ready-to-use embeddings for FasTtext.
 7. Forexample compile domain discovery/DD.py to get column embedding matrix (X.txt) using EmbDi and compile domain discovery/DD_SBERT(H+B)/DD_SBERT.py to get column embeddings of schema+instance level evidence using SBERT.
+8. When applying SDCN with tabular transformers for schema+instance level data, compile schema inference/schema + instances/SI_transformers/SI_transformers.py
+9. To get results with standard clusterign algorithms compile SC/SC.py
 
 
 
