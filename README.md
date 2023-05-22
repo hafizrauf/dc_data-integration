@@ -92,6 +92,7 @@ In order to reproduce results in the paper, following parameters can be adopted:
 
 **Note:** 
 **1.** Due to storage limitations, please unzip (Tables.zip) before compiling schema inference code.
+
 **2.** Due to different levels of precision for floating-point arithmetic and the architectural aspect of different GPUs and CPUs, the resulting values can be slightly different. However, the overall results will be the same.
 
 
