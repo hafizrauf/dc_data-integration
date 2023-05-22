@@ -23,6 +23,7 @@ torch.manual_seed(555)
 
 corpora_name ='X' # id of data set
 labels ='labels' # labels of dataset
+nb_dimension = 768 # embeddings dim
 
 
 #torch.cuda.set_device(0)
@@ -72,7 +73,7 @@ def pretrain_ae(model, dataset, y):
     print(model)
     optimizer = Adam(model.parameters(), lr=1e-3)
     e_start = time()
-    for epoch in range(100):
+    for epoch in range(30):
         # adjust_learning_rate(optimizer, epoch)
         for batch_idx, (x, _) in enumerate(train_loader):
             x = x.cuda()
@@ -90,11 +91,17 @@ def pretrain_ae(model, dataset, y):
             loss = F.mse_loss(x_bar, x)
             print('{} loss: {}'.format(epoch, loss))
             
-            #for kmeans please uncomment
+            #for kmeans please un-comment
           #  kmeans = KMeans(n_clusters = 26, n_init=2, random_state= 2).fit(z.data.cpu().numpy())
             brc = Birch(n_clusters=26).fit(z.data.cpu().numpy())
-            sil = silhouette_score(z.data.cpu().numpy(), brc.predict(z.data.cpu().numpy()))
-            eva(y, brc.predict(z.data.cpu().numpy()),sil, epoch )
+            labels = brc.predict(z.data.cpu().numpy())
+            # Calculate the number of unique labels
+            num_clusters = np.unique(labels).shape[0]
+            if num_clusters > 1:
+                sil = silhouette_score(z.data.cpu().numpy(), labels)
+            else:
+                sil = 0
+            eva(y, labels,sil, epoch )
             e_end = time()
             print("Epoch",{epoch},"took",{e_end-e_start}," sec to run.")
             #eva(y, kmeans.labels_, epoch)
