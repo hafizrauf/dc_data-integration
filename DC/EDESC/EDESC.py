@@ -166,6 +166,7 @@ def train_EDESC():
     accmax = 0
     nmimax = 0
     arimax = 0
+    bestsil = 0
     y_pred_last = y_pred
     model.D.data = D.to(device)
     
