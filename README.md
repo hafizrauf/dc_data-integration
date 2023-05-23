@@ -22,7 +22,7 @@ This repo provides the following:
 * [SBERT](https://www.sbert.net/docs/hugging_face.html)
 * [FastText](https://fasttext.cc/docs/en/crawl-vectors.html)
 
-#### For original implementations please see the links given above. The original license terms apply and a copy of the original license files included in the respective folder of embeddings techniques or deep clustering algorithms.
+#### For original implementations please see the links given above.
 
 **Special thanks** to the authors (of all deep clustering and embedding approaches mentioned above) for providing their implementations publically.
 
@@ -102,4 +102,11 @@ In order to reproduce results in the paper, following parameters can be adopted:
 
 **2.** Due to different levels of precision for floating-point arithmetic and the architectural aspect of different GPUs and CPUs, the resulting values can be slightly different. However, the overall results will be the same. We used **Nvidia A100 GPU with 80GB GPU RAM **.
 
+## License
+This work provides a modified version of the following embedding techniques and deep clustering algorithms.  The original license terms apply, and a copy of the original license files is included in the respective folder of embedding techniques and deep clustering algorithms.
 
+* [SDCN](https://github.com/bdy9527/SDCN)
+* [EDESC](https://github.com/JinyuCai95/EDESC-pytorch)
+* [EmbDi](https://gitlab.eurecom.fr/cappuzzo/embdi)
+* [TabTransformer](https://github.com/jrzaurin/pytorch-widedeep)
+* [Tabnet](https://github.com/jrzaurin/pytorch-widedeep)
