@@ -22,7 +22,7 @@ This repo provides the following:
 * [SBERT](https://www.sbert.net/docs/hugging_face.html)
 * [FastText](https://fasttext.cc/docs/en/crawl-vectors.html)
 
-#### For original implementations please see the links given above.
+#### For original implementations please see the links given above. The original license terms apply and a copy of the original license files included in the respective folder of embeddings techniques or deep clustering algorithms.
 
 **Special thanks** to the authors (of all deep clustering and embedding approaches mentioned above) for providing their implementations publically.
 
