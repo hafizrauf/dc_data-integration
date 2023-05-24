@@ -1,4 +1,4 @@
-# **Deep Clustering for Data Integration Tasks**
+# **Deep Clustering for Data Cleaning and Integration**
 
 
 This repo provides the following:
