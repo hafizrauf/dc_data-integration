@@ -1,5 +1,6 @@
 # **Deep Clustering for Data Cleaning and Integration**
 
+https://arxiv.org/abs/2305.13494
 
 This repo provides the following:
 * An evaluation of existing deep clustering algorithms on several data integration problems, specifically schema inference, entity resolution, and domain discovery.
