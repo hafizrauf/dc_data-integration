@@ -14,6 +14,7 @@ This repo provides the following:
 
 * [SDCN](https://github.com/bdy9527/SDCN)
 * [EDESC](https://github.com/JinyuCai95/EDESC-pytorch)
+* [SHGP](https://github.com/kepsail/SHGP)
 
 #### And, the following embedding techniques:
 
@@ -41,7 +42,7 @@ There are two major parts to this project: For each data integration problem, i.
 
 
  1. Develop a dense embedding matrix (X.txt) from raw data (using SBERT, FastText, TabTransformer, and Tabnet to embed Tables for schema inference, EmbDi and SBERT to embed rows for entity resolution, and EmbDi and SBERT to embed columns for domain discovery).
- 2. A dense embedding matrix (X.txt) will then be used in deep clustering algorithms (SDCN and EDESC) as input to perform clustering.
+ 2. A dense embedding matrix (X.txt) will then be used in deep clustering algorithms (SDCN, EDESC and SHGP) as input to perform clustering.
 
 ## Steps
 
@@ -156,6 +157,7 @@ This work provides a modified version of the following embedding techniques and 
 
 * [SDCN](https://github.com/bdy9527/SDCN)
 * [EDESC](https://github.com/JinyuCai95/EDESC-pytorch)
+* [SHGP](https://github.com/kepsail/SHGP)
 * [EmbDi](https://gitlab.eurecom.fr/cappuzzo/embdi)
 * [TabTransformer](https://github.com/jrzaurin/pytorch-widedeep)
 * [Tabnet](https://github.com/jrzaurin/pytorch-widedeep)
