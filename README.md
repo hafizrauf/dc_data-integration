@@ -108,35 +108,39 @@ In order to reproduce results in the paper, parameters (given in Table 1 and 2) 
 
 
 #### Table 2: Hyperparameters used for TUS, Geographic Settlements and Monitor
-| DC Method | Task | Embedding     | P-train epochs | Training Epochs | Z   | Layer Size | #layers | Initialization |
-|-----------|------|---------------|----------------|-----------------|-----|------------|---------|----------------|
-| SDCN      | SI   | SBERT         | 30             | 5               | 100 | 1000       | 2       | kmean         |
-| SDCN      | SI   | FastText      | 30             | 10              | 100 | 1000       | 2       | kmean         |
-| SDCN      | SI   | TabNet        | 30             | 100             | 100 | 1000       | 2       | kmean         |
-| SDCN      | SI   | TabTransformer| 30             | 68              | 100 | 1000       | 2       | kmean         |
-| EDESC     | SI   | SBERT         | 30             | 8               | 111 | 1000       | 2       | kmean         |
-| EDESC     | SI   | FastText      | 30             | 83              | 111 | 1000       | 2       | kmean         |
-| EDESC     | SI   | TabNet        | 30             | 52              | 111 | 1000       | 2       | kmean         |
-| EDESC     | SI   | TabTransformer| 30             | 100             | 111 | 1000       | 2       | kmean         |
-| SHGP      | SI   | SBERT         | -              | 50              | -   | 1000       | -       | kmean         |
-| SHGP      | SI   | FastText      | -              | 50              | -   | 1000       | -       | kmean         |
-| SHGP      | SI   | TabNet        | -              | 50              | -   | 1000       | -       | kmean         |
-| SHGP      | SI   | TabTransformer| -              | 50              | -   | 1000       | -       | kmean         |
-| SDCN      | ER   | EmbDi         | 200            | -               | 100 | 1000       | 2       | -             |
-| EDESC     | ER   | EmbDi         | 100            | 4               | 100 | 1000       | 2       | kmean         |
-| SHGP      | ER   | EmbDi         | -              | 50              | -   | 1000       | -       | kmean         |
-| SDCN      | ER   | SBERT         | 100            | -               | 100 | 1000       | 2       | -             |
-| EDESC     | ER   | SBERT         | 30             | 4               | 786 | 1000       | 2       | kmean         |
-| SHGP      | ER   | SBERT         | -              | 50              | -   | 1000       | -       | kmean         |
-| SDCN      | DD   | SBERT         | 30             | -               | 100 | 1000       | 2       | kmean         |
-| SDCN      | DD   | FastText      | 30             | -               | 100 | 1000       | 2       | kmean         |
-| SDCN      | DD   | EmbDi         | 30             | 6               | 100 | 1000       | 2       | kmean         |
-| SDCN      | DD   | SBERT (H+B)   | 50             | -               | 100 | 1000       | 2       | Birch         |
-| EDESC     | DD   | SBERT         | 30             | 100             | 243 | 1000       | 2       | kmean         |
-| EDESC     | DD   | FastText      | 30             | 4               | 81  | 1000       | 2       | kmean         |
-| EDESC     | DD   | EmbDi         | 30             | 5               | 243 | 1000       | 2       | kmean         |
-| EDESC     | DD   | SBERT (H+B)   | 30             | 1               | 243 | 1000       | 2       | Birch         |
-| SHGP      | DD   | SBERT         | -              | 50              | -   | 1000       | -      
+| DC Method | Task | Embedding       | P-train epochs | Training Epochs | Z    | Layer Size | #layers | Initialization |
+|-----------|------|-----------------|----------------|-----------------|------|------------|---------|----------------|
+| SDCN      | SI   | SBERT           | 30             | 5               | 100  | 1000       | 2       | kmean         |
+| SDCN      | SI   | FastText        | 30             | 10              | 100  | 1000       | 2       | kmean         |
+| SDCN      | SI   | TabNet          | 30             | 100             | 100  | 1000       | 2       | kmean         |
+| SDCN      | SI   | TabTransformer  | 30             | 68              | 100  | 1000       | 2       | kmean         |
+| EDESC     | SI   | SBERT           | 30             | 8               | 111  | 1000       | 2       | kmean         |
+| EDESC     | SI   | FastText        | 30             | 83              | 111  | 1000       | 2       | kmean         |
+| EDESC     | SI   | TabNet          | 30             | 52              | 111  | 1000       | 2       | kmean         |
+| EDESC     | SI   | TabTransformer  | 30             | 100             | 111  | 1000       | 2       | kmean         |
+| SHGP      | SI   | SBERT           | -              | 50              | -    | 1000       | -       | kmean         |
+| SHGP      | SI   | FastText        | -              | 50              | -    | 1000       | -       | kmean         |
+| SHGP      | SI   | TabNet          | -              | 50              | -    | 1000       | -       | kmean         |
+| SHGP      | SI   | TabTransformer  | -              | 50              | -    | 1000       | -       | kmean         |
+| SDCN      | ER   | EmbDi           | 200            | -               | 100  | 1000       | 2       | -             |
+| EDESC     | ER   | EmbDi           | 100            | 4               | 100  | 1000       | 2       | kmean         |
+| SHGP      | ER   | EmbDi           | -              | 50              | -    | 1000       | -       | kmean         |
+| SDCN      | ER   | SBERT           | 100            | -               | 100  | 1000       | 2       | -             |
+| EDESC     | ER   | SBERT           | 30             | 4               | 786  | 1000       | 2       | kmean         |
+| SHGP      | ER   | SBERT           | -              | 50              | -    | 1000       | -       | kmean         |
+| SDCN      | DD   | SBERT           | 30             | -               | 100  | 1000       | 2       | kmean         |
+| SDCN      | DD   | FastText        | 30             | -               | 100  | 1000       | 2       | kmean         |
+| SDCN      | DD   | EmbDi           | 30             | 6               | 100  | 1000       | 2       | kmean         |
+| SDCN      | DD   | SBERT (H+B)     | 50             | -               | 100  | 1000       | 2       | Birch         |
+| EDESC     | DD   | SBERT           | 30             | 100             | 243  | 1000       | 2       | kmean         |
+| EDESC     | DD   | FastText        | 30             | 4               | 81   | 1000       | 2       | kmean         |
+| EDESC     | DD   | EmbDi           | 30             | 5               | 243  | 1000       | 2       | kmean         |
+| EDESC     | DD   | SBERT (H+B)     | 30             | 1               | 243  | 1000       | 2       | Birch         |
+| SHGP      | DD   | SBERT           | -              | 50              | -    | 1000       | -       | kmean         |
+| SHGP      | DD   | FastText        | -              | 50              | -    | 1000       | -       | kmean         |
+| SHGP      | DD   | EmbDi           | -              | 50              | -    | 1000       | -       | kmean         |
+| SHGP      | DD   | SBERT (H+B)     | -              | 50              | -    | 1000       | -       | kmean         |
+
 
 
 **-** SDCN or EDESC did not manage to improve the representation, and we retained the AE training with Birch or Kmeans clustering
