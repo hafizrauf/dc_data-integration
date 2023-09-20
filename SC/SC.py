@@ -1,17 +1,22 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-
-
 from sklearn.cluster import DBSCAN
+import hdbscan
+
 from sklearn.metrics.cluster import rand_score
 from sklearn.metrics.cluster import adjusted_rand_score
 from sklearn.metrics.cluster import normalized_mutual_info_score
 import numpy as np
+from kneed import KneeLocator
 import statistics
 from time import time
 import seaborn as sns
+import matplotlib.pyplot as plt
+import random
 import torch
+from sklearn.neighbors import NearestNeighbors
+from sklearn.cluster import MeanShift, estimate_bandwidth
 import pandas as pd
 from sklearn.metrics.cluster import fowlkes_mallows_score
 from scipy.optimize import linear_sum_assignment
@@ -19,8 +24,13 @@ import numpy as np
 from munkres import Munkres, print_matrix
 from scipy.optimize import linear_sum_assignment as linear
 from sklearn import metrics
+from collections import Counter
 from scipy.special import comb
 
+# set seed
+random.seed(555)
+np.random.seed(555)
+torch.manual_seed(555)
 
 
 def cluster_acc2(y_true, y_pred):
@@ -120,8 +130,14 @@ def acc(y_true, y_pred):
 
 
 
-#define Rand index function
 def revised_rand_index(actual, pred):
+    # Convert to integer type
+    actual = actual.astype(int)
+    pred = pred.astype(int)
+    
+    # Handle negative values in 'pred' (treat as outliers and convert to a unique label)
+    unique_label = np.max(pred) + 1 if np.any(pred < 0) else np.max(pred)
+    pred[pred < 0] = unique_label
 
     tp_plus_fp = comb(np.bincount(actual), 2).sum()
     tp_plus_fn = comb(np.bincount(pred), 2).sum()
@@ -136,7 +152,7 @@ def revised_rand_index(actual, pred):
     print('fp = '+str(fp))
     print('fn = '+str(fn))
     
-    print('Percision is = ' + str(tp/(tp+fp)))
+    print('Precision is = ' + str(tp/(tp+fp)))
     print('Recall is = ' + str(tp/(tp+fn)))
     p= tp/(tp+fp)
     r = tp/(tp+fn)
@@ -148,22 +164,17 @@ def revised_rand_index(actual, pred):
 
 
 X=pd.read_csv('X.txt', header =None, sep = ' ')
-
-
 Y=pd.read_csv('labels.txt', sep=' ', header = None)
 Y= pd.DataFrame(Y)
-#Y = Y.iloc[1: , :]
-#Y1 = Y[0]
-#Y = Y[1]
-
 Y = Y.to_numpy()
 Y=Y.flatten()
-Y
 
-print("-----------------------------------Birch----------------------------------------")
+n_clusters = 56 # select number of GT clusters
+
+# print("-----------------------------------Birch----------------------------------------")
 start = time()
 from sklearn.cluster import Birch
-brc = Birch(n_clusters = 26) #
+brc = Birch(n_clusters = n_clusters) #
 brc.fit(X)
 brc.predict(X)
 acc, f1 = cluster_acc2(Y, brc.predict(X))
@@ -177,17 +188,19 @@ print('F1 '+str(f1))
 df = pd.DataFrame(brc.predict(X))
 df.to_csv('Birch_pred.csv',sep=',', header = None)  
 count=df.value_counts().tolist()
+unary_clusters = count.count(1)
+print('Number of unary clusters = '+str(unary_clusters))
 print('Median cluster count = '+str(statistics.median(count)))
 print('Mean cluster count = '+str(statistics.mean(count)))
 end = time() 
 print("Birch took ",{end-start}," sec to run.")
 
 
-print("-----------------------------------Kmean----------------------------------------")
-#------
+# print("-----------------------------------Kmean----------------------------------------")
+# #------
 from sklearn.cluster import KMeans
 start = time()
-kmeans = KMeans(n_clusters=26, n_init=2, random_state= 2).fit(X)
+kmeans = KMeans(n_clusters=n_clusters, n_init=2, random_state= 2).fit(X)
 acc, f1 = cluster_acc2(Y, kmeans.labels_)
 print('Number of clusters '+str(len(np.unique(kmeans.labels_))))
 print('Rand Score '+str(rand_score(Y, kmeans.labels_)))
@@ -199,10 +212,70 @@ print('F1 '+str(f1))
 df = pd.DataFrame(kmeans.labels_) 
 df.to_csv('kmeans_pred.csv',sep=',', header = None)  
 count=df.value_counts().tolist()
+unary_clusters = count.count(1)
+print('Number of unary clusters = '+str(unary_clusters))
 print('Median cluster count = '+str(statistics.median(count)))
 print('Mean cluster count = '+str(statistics.mean(count)))
 end = time()
 print("Kmeans took ",{end-start}," sec to run.")
 
 
+print("--------------------DBSCAN Clustering---------------------")
 
+min_samples = 56  # The number of samples in a neighborhood for a point to be considered as a core point.
+
+
+
+nearest_neighbors = NearestNeighbors(n_neighbors=10)
+neighbors = nearest_neighbors.fit(X)
+
+distances, indices = neighbors.kneighbors(X)
+distances = np.sort(distances[:,9], axis=0)
+
+fig = plt.figure(figsize=(5, 5))
+plt.plot(distances)
+plt.xlabel("Points")
+plt.ylabel("Distance")
+
+
+i = np.arange(len(distances))
+knee = KneeLocator(i, distances, S=1, curve='convex', direction='increasing', interp_method='polynomial')
+
+fig = plt.figure(figsize=(5, 5))
+knee.plot_knee()
+plt.xlabel("Points")
+plt.ylabel("Distance")
+
+print("eps value ", distances[knee.knee])
+
+eps = distances[knee.knee]  # if eps is 0 by knee method, just select 0.1, if still not then check 0.1 to 1.0 all parameters
+#eps = 0.5
+start = time()
+
+dbscan = DBSCAN(eps=eps, min_samples=min_samples)
+dbscan.fit(X)
+
+end = time()
+
+labels = dbscan.labels_
+# Number of clusters in labels, ignoring noise if present.
+n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
+print(len(Y))
+print(len(labels))
+acc, f1 = cluster_acc2(Y, labels)
+print('Number of clusters ' + str(n_clusters_))
+print('Rand Score '+str(revised_rand_index(Y, labels)))
+print('Adjusted Rand Score ' + str(adjusted_rand_score(Y, labels)))
+print('Normalized mutual info score ' + str(normalized_mutual_info_score(Y, labels)))
+print('Accuracy ' + str(acc))
+print('F1 ' + str(f1))
+
+df = pd.DataFrame(labels)
+df.to_csv('DBSCAN_pred.csv', sep=',', header=None)
+
+count = df.value_counts().tolist()
+unary_clusters = count.count(1)
+print('Number of unary clusters = '+str(unary_clusters))
+print('Median cluster count = '+str(statistics.median(count)))
+print('Mean cluster count = '+str(statistics.mean(count)))
+print("DBSCAN took ", {end - start}, " sec to run.")
