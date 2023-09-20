@@ -46,7 +46,7 @@ There are two major parts to this project: For each data integration problem, i.
 
 ## Steps
 
-Here we show demo steps to re-produce results for schema inference using schema-level data (SBERT + SDCN) and for entity resolution for schema+instance level data (EmbDi + SDCN). 
+Here we show demo steps to re-produce results for schema inference using schema-level web tables data (SBERT + SDCN), schema+instance level Table union search data (SBERT + SDCN) and for entity resolution for schema+instance level data (EmbDi + SDCN). 
 
 
 1. Compile schema inference/schema + instances/Preprocessing.ipynb to get schema level information from tables.
@@ -55,17 +55,20 @@ Here we show demo steps to re-produce results for schema inference using schema-
 
    3.1. DC/SDCN/calcu_graph.py to generate KNN graph
   
-   3.2. DC/SDCN/data/pretrain.py for pretraining or AE version (please see hyperparameter table below) 
+   3.2. DC/SDCN/data/pretrain.py for pretraining or AE version (please see hyperparameter tables below) 
   
    3.3. DC/SDCN/sdcn.py for clustering results (we considered Q distribution as our final results)
   
    3.4. Please updated nb_dimension = 768  accordingly # for SBERT 786  
 4. Compile entity resolution/ER.py to get row embedding matrix (X.txt) using EmbDi and compile entity resolution/ER_SBERT/ER_SBERT.py to get row embeddings using SBERT.
 5. Repeat step (3) with input as row embedding matrix (X.txt) to get clustering results.
-6. Please repeat (3) for each embedding obtained (see folders --> schema inference/, entity resolution/ and domain discovery/) or see full_data/ to get the combination of all embeddings for all problems except DD due to the size limit. We are only able to provide ready-to-use embeddings for FasTtext.
-7. Forexample compile domain discovery/DD.py to get column embedding matrix (X.txt) using EmbDi and compile domain discovery/DD_SBERT(H+B)/DD_SBERT.py to get column embeddings of schema+instance level evidence using SBERT.
-8. When applying SDCN with tabular transformers for schema+instance level data, compile schema inference/schema + instances/SI_transformers/SI_transformers.py
-9. To get results with standard clustering algorithms compile SC/SC.py
+6. Compile TUS.py and generate_labels.py to obtain labels using the Louvain method. We first need to download TUS data (benchmark.sqlite and groundtruth.sqlite) from [here](https://github.com/RJMillerLab/table-union-search-benchmark).
+7. Compile Transformer.py to get table embedding matrix (X.txt) using Tabnet or TabTransformer.
+8. Repeat step (3) with input as table embedding matrix (X.txt) to get clustering results.
+9. Please repeat (3) for each embedding obtained (see folders --> schema inference/, entity resolution/ and domain discovery/) or see full_data/ to get the combination of all embeddings for all problems except DD due to the size limit. We are only able to provide ready-to-use embeddings for FasTtext.
+10. Forexample compile domain discovery/DD.py to get column embedding matrix (X.txt) using EmbDi and compile domain discovery/DD_SBERT(H+B)/DD_SBERT.py to get column embeddings of schema+instance level evidence using SBERT.
+11. When applying SDCN with tabular transformers for schema+instance level data, compile schema inference/schema + instances/SI_transformers/SI_transformers.py
+12. To get results with standard clustering algorithms compile SC/SC.py
 
 
 
