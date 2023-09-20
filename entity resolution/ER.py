@@ -218,7 +218,7 @@ for f in os.listdir(DIRECTORY_EMB):
         
         
         
-#-------------- Getting row vectors-----------------
+#-------------- Getting row vectors for Music Brainz-----------------
 
 
 DIRECTORY_DATASET = DIRECTORY_OUTPUT
@@ -276,7 +276,57 @@ vectors1.to_csv('X.txt', index=False, header = False,sep=' ')
 labels.to_csv('labels.txt', index=False, header = False,sep=' ')
 
 
+#-------------- Getting row vectors for geographicalSettelments-----------------
 
+
+# vectors = []
+# Text = []
+# labels = []
+
+# for filename in os.listdir(DIRECTORY_EMB): 
+#     if '.emb' in str(filename):
+#         with open(DIRECTORY_EMB + filename, 'r', encoding='utf-8') as fp: 
+#             lines = fp.readlines()
+#             for line in lines:
+#                 if line[:5] == 'idx__' :
+#                     # Get index of line int the raw dataset
+#                     index_line = int(line.split(' ')[0].split('__')[1])
+                    
+#                     # Add label
+#                     df_lab = pd.read_csv(filename.split('.emb')[0] + '_labels.csv', sep=',')
+                    
+#                     if dataset_name == 'geographicalSettelments':
+#                         col_lab = 'label'
+                    
+#                     labels.append(int(df_lab[col_lab][index_line]))
+                
+#                     #print(len(set(labels)))
+                                    
+#                     # Add vector
+#                     vectors.append(np.array([float(x) for x in line.split(' ')[1:]]))
+                
+#                     # Add text
+#                     with open(DIRECTORY_DATASET + filename.split('.emb')[0] + '.csv', 'r', encoding='utf-8') as ftt:
+#                         lines_txt = ftt.readlines()
+#                         # +1: because we remove header line
+#                         Text.append(lines_txt[index_line + 1]) 
+
+# print('Number of records/entities: ' + str(len(vectors)))
+# print('Number of labels: ' + str(len(set(labels))))
+
+# number_instance = len(vectors) #(vectors)
+# vectors = vectors[:number_instance]
+# Text = Text[:number_instance]
+# labels = labels[:number_instance]
+
+# # Transform list to array
+# vectors = np.array(vectors)
+# y = labels
+
+# vectors1=pd.DataFrame(vectors) 
+# y1=pd.DataFrame(y) 
+# vectors1.to_csv('X.txt', index=False, header = False,sep=' ')
+# y1.to_csv('labels.txt', index=False, header = False,sep=' ')
 
 
 
