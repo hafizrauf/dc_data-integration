@@ -62,8 +62,8 @@ Here we show demo steps to re-produce results for schema inference using schema-
    3.4. Please updated nb_dimension = 768  accordingly # for SBERT 786  
 4. Compile entity resolution/ER.py to get row embedding matrix (X.txt) using EmbDi and compile entity resolution/ER_SBERT/ER_SBERT.py to get row embeddings using SBERT.
 5. Repeat step (3) with input as row embedding matrix (X.txt) to get clustering results.
-6. Compile TUS.py and generate_labels.py to obtain labels using the Louvain method. We first need to download TUS data (benchmark.sqlite and groundtruth.sqlite) from [here](https://github.com/RJMillerLab/table-union-search-benchmark).
-7. Compile Transformer.py to get table embedding matrix (X.txt) using Tabnet or TabTransformer.
+6. Compile schema inference/Table union search/TUS.py and schema inference/Table union search/generate_labels.py to obtain labels using the Louvain method. We first need to download TUS data (benchmark.sqlite and groundtruth.sqlite) from [here](https://github.com/RJMillerLab/table-union-search-benchmark).
+7. Compile schema inference/Table union search/Header + Body /Transformer.py to get table embedding matrix (X.txt) using Tabnet or TabTransformer.
 8. Repeat step (3) with input as table embedding matrix (X.txt) to get clustering results.
 9. Please repeat (3) for each embedding obtained (see folders --> schema inference/, entity resolution/ and domain discovery/) or see full_data/ to get the combination of all embeddings for all problems except DD due to the size limit. We are only able to provide ready-to-use embeddings for FasTtext.
 10. Forexample compile domain discovery/DD.py to get column embedding matrix (X.txt) using EmbDi and compile domain discovery/DD_SBERT(H+B)/DD_SBERT.py to get column embeddings of schema+instance level evidence using SBERT.
