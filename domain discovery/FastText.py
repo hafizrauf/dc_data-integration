@@ -22,7 +22,7 @@ if not os.path.exists(model_path):
 model = KeyedVectors.load_word2vec_format(model_path, binary=False)
 
 
-df = pd.read_csv('monitor.csv')
+df = pd.read_csv('Data/monitor.csv')
 
 
 embeddings = []
