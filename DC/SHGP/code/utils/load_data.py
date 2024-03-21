@@ -3,7 +3,8 @@ import scipy.sparse as sp
 import torch
 import pickle
 import torch.nn.functional as F
-
+from scipy.sparse import coo_matrix
+from sklearn.metrics import pairwise_distances as pair
 
 
 def sp_coo_2_sp_tensor(sp_coo_mat):
@@ -24,12 +25,6 @@ def train_val_test_split(label_shape, train_percent):
     return idx_train, idx_val, idx_test
 
 
-
-
-
-
-
-
 def load_data(dataset,train_percent):
 
     if dataset=="custom":
@@ -40,32 +35,46 @@ def load_data(dataset,train_percent):
 
 from sklearn.preprocessing import LabelEncoder
 
+from sklearn.preprocessing import normalize
+
+
+
+
+
+
 def load_custom_dataset(train_percent):
-    # Assuming X.txt contains space-separated values
+     
     data = np.loadtxt('X.txt')
     labels = np.loadtxt('labels.txt').astype(int)
 
-    # Use LabelEncoder to transform labels
+    
     le = LabelEncoder()
     labels = le.fit_transform(labels)
+    idx_train, idx_val, idx_test = train_val_test_split(labels.shape[0], train_percent)
 
-    # Convert to PyTorch tensors
+    
     data_tensor = torch.FloatTensor(data)
     labels_tensor = torch.LongTensor(labels)
 
-    # Create dictionary for features
+    # Construct graph
+    adj_matrix = construct_graph(data, labels)
+
+    
+    rows, cols = [], []
+    for i, neighbors in adj_matrix.items():
+        for j in neighbors:
+            rows.append(i)
+            cols.append(j)
+    values = [1] * len(rows)  
+    adj_sparse = coo_matrix((values, (rows, cols)), shape=(len(adj_matrix), len(adj_matrix)))
+
+    adj_dict = {'custom': {'custom': torch.FloatTensor(adj_sparse.toarray()).to_sparse()}}
+
     ft_dict = {'custom': data_tensor}
-
-    # Split the dataset into train, validation, and test sets
-    idx_train, idx_val, idx_test = train_val_test_split(labels_tensor.shape[0], train_percent)
-
-    # Create dictionary for labels
     label = {'custom': [labels_tensor, idx_train, idx_val, idx_test]}
 
-    # Assuming no adjacency matrix is needed for the custom dataset
-    adj_dict = {'custom': {}}
-
     return label, ft_dict, adj_dict
+
 
 
 
